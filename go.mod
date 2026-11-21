@@ -1,5 +1,5 @@
-module github.com/kore-project/kore-plugin-echo
+module github.com/pengtang1024/kore-plugin-echo
 
 go 1.26
 
-require github.com/kore-project/kore/pkg/pluginapi v0.1.0
+require github.com/pengtang1024/kore/pkg/pluginapi v0.1.0

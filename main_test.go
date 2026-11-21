@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/kore-project/kore/pkg/pluginapi"
+	"github.com/pengtang1024/kore/pkg/pluginapi"
 )
 
 // testConfig 构造握手与会话循环共用的一致配置（不依赖环境变量）。

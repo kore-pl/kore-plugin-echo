@@ -5,7 +5,7 @@ kore 的 **M1 验证插件**：用于验证主壳的 `install → hello → invo
 
 ## 定位与边界
 
-- 协议：`kore.plugin.v1`，`lifecycle = resident`，唯一依赖 `github.com/kore-project/kore/pkg/pluginapi` + 标准库。
+- 协议：`kore.plugin.v1`，`lifecycle = resident`，唯一依赖 `github.com/pengtang1024/kore/pkg/pluginapi` + 标准库。
 - 只做四件事：完成 `kore.hello` 握手、响应调用、按约定方法模拟慢调用 / 超时 / 崩溃、收到 `kore.shutdown` 优雅退出。
 - 不读写内核 `internal/`，不联网、不写状态库、不落任何业务数据。
 

@@ -7,7 +7,7 @@ import (
 	"log/slog"
 	"net"
 
-	"github.com/kore-project/kore/pkg/pluginapi"
+	"github.com/pengtang1024/kore/pkg/pluginapi"
 )
 
 // serve 执行会话循环：读帧 → 分发 → 写 response；收到 kore.shutdown 后返回 nil。

@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/kore-project/kore/pkg/pluginapi"
+	"github.com/pengtang1024/kore/pkg/pluginapi"
 )
 
 // embeddedInfo 是随二进制发布的内嵌清单：握手用的 version / requires_kore /
