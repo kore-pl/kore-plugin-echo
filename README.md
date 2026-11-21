@@ -37,7 +37,7 @@ kore 的 **M1 验证插件**：用于验证主壳的 `install → hello → invo
 
 ```bash
 make build   # CGO_ENABLED=0 GOAMD64=v1 go build -trimpath -buildvcs=false -ldflags="-s -w" -o bin/echo .
-make dist    # 产出 dist/echo-0.1.0.tar.gz（info.json + bin/echo + web/ + SHA256SUMS）与同名 .sha256
+make dist    # 产出 dist/echo-0.1.1.tar.gz（info.json + bin/echo + web/ + SHA256SUMS）与同名 .sha256
 make check   # gofmt → go vet → go test -timeout 200s
 ```
 

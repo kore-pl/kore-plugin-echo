@@ -2,6 +2,17 @@
 
 本仓库遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) 与语义化版本。
 
+## [0.1.1] - 2026-11-22
+
+### 修复
+
+- 依赖 `github.com/pengtang1024/kore/pkg/pluginapi` 升至 `v0.1.1`。`v0.1.0` 的 `go.mod` 声明旧 module 路径 `github.com/kore-project/kore/pkg/pluginapi`，已被 `retract`，消费者无法解析。
+- 脱离本地 `go.work` 后可构建：`GOWORK=off go build ./...` / `GOWORK=off make build` / `GOWORK=off make dist` 全部通过，干净 clone 可复现。
+
+### 说明
+
+- 无代码与协议变更；`info.json` 仅版本号递增（0.1.0 → 0.1.1），`protocol` / `capabilities` / `triggers` / `requires_kore` 不变。
+
 ## [0.1.0] - 2026-11-22
 
 ### 新增
