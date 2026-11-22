@@ -11,11 +11,11 @@ PACKAGE := $(DIST)/$(ID)-$(VERSION).tar.gz
 
 # 静态构建：G-16 兼容性基线（CGO_ENABLED=0 + GOAMD64=v1 + trimpath + -s -w）。
 build:
-	CGO_ENABLED=0 GOAMD64=v1 go build -trimpath -buildvcs=false -ldflags="-s -w" -o $(BIN) .
+	CGO_ENABLED=0 GOAMD64=v1 GOWORK=off go build -trimpath -buildvcs=false -ldflags="-s -w" -o $(BIN) .
 
 # 打包：info.json（回填 size_bytes）+ bin/echo + web/ + SHA256SUMS，并附 .sha256。
 dist: build
-	@set -e; \
+	@set -eo pipefail; \
 	rm -rf $(DIST)/stage $(PACKAGE) $(PACKAGE).sha256; \
 	mkdir -p $(DIST)/stage/bin $(DIST)/stage/web; \
 	cp $(BIN) $(DIST)/stage/bin/$(ID); \
@@ -28,7 +28,7 @@ dist: build
 		size=$$next; \
 	done; \
 	( cd $(DIST)/stage && sha256sum info.json bin/$(ID) > SHA256SUMS ); \
-	tar -czf $(PACKAGE) -C $(DIST)/stage info.json bin web SHA256SUMS; \
+	tar --sort=name --mtime=@0 --owner=0 --group=0 --numeric-owner -cf - -C $(DIST)/stage . | gzip -9n > $(PACKAGE); \
 	( cd $(DIST) && sha256sum $(ID)-$(VERSION).tar.gz > $(ID)-$(VERSION).tar.gz.sha256 ); \
 	rm -rf $(DIST)/stage; \
 	echo "打包完成: $(PACKAGE)"
