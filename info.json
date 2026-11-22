@@ -1,7 +1,7 @@
 {
   "id": "echo",
   "name": "Echo 验证插件",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "protocol": "kore.plugin.v1",
   "lifecycle": "resident",
   "depth_level": "basic",

@@ -2,6 +2,12 @@
 
 本仓库遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) 与语义化版本。
 
+## [0.1.2] - 2026-11-23
+
+- build: dist 去除 ./ 根条目以通过安装器校验
+- build: dist 改为确定性打包（sha256 可复现）
+- build: 位级可复现打包（stage chmod + tar --mode 归一、size_bytes 收敛），二进制改嵌 manifest.json，消除同版本 sha 漂移
+
 ## [0.1.1] - 2026-11-22
 
 ### 修复
