@@ -2,6 +2,17 @@
 
 本仓库遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) 与语义化版本。
 
+## [0.1.3] - 2026-11-23
+
+### 修复
+
+- `info.json.lifecycle`：`resident` → `lazy`。echo 是验证插件，只在验收调用时被唤起，常驻会白占一个 resident 槽位（默认上限 2）。实测 `site` + `terminal` 两个 resident 占满后，再启用 echo 直接 `E_RATELIMIT`（HTTP 429），迫使验收前先停掉业务插件腾槽。**验证工具不该消耗被验证的资源。**
+- 改为 `lazy` 后：enable 只登记 `desired=enabled` 不起进程；`echo.ping` 首次调用按需冷启，空闲 `idle_timeout` 后自动退出并归还槽位（槽位口径见内核 `internal/core/supervisor/lazy.go`）。
+
+### 说明
+
+- 无方法 / 协议 / 能力变更：`protocol` / `capabilities` / `triggers` / `requires_kore` 不变，`id@version` 换 sha 故 patch bump。
+
 ## [0.1.2] - 2026-11-23
 
 - build: dist 去除 ./ 根条目以通过安装器校验

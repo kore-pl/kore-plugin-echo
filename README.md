@@ -5,7 +5,8 @@ kore 的 **M1 验证插件**：用于验证主壳的 `install → hello → invo
 
 ## 定位与边界
 
-- 协议：`kore.plugin.v1`，`lifecycle = resident`，唯一依赖 `github.com/pengtang1024/kore/pkg/pluginapi` + 标准库。
+- 协议：`kore.plugin.v1`，`lifecycle = lazy`（按需冷启、空闲退出），唯一依赖 `github.com/pengtang1024/kore/pkg/pluginapi` + 标准库。
+- 生命周期取 `lazy` 而非 `resident`：本插件是**验证工具**，只在验收时被 `echo.ping` 唤起；常驻会白占一个 resident 槽位（默认上限 2），导致 `site` + `terminal` 已占满时无法再跑验收，真机上表现为 `E_RATELIMIT`（HTTP 429）。**验证工具不该消耗被验证的资源。**
 - 只做四件事：完成 `kore.hello` 握手、响应调用、按约定方法模拟慢调用 / 超时 / 崩溃、收到 `kore.shutdown` 优雅退出。
 - 不读写内核 `internal/`，不联网、不写状态库、不落任何业务数据。
 
