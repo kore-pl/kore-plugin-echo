@@ -5,3 +5,6 @@ go.work.sum
 # 构建与打包产物。
 bin/
 dist/
+
+# 误把 go build 输出到仓根时的产物（正确输出是 bin/kore-plugin-echo）。
+/kore-plugin-echo
