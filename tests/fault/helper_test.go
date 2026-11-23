@@ -120,8 +120,15 @@ func handshakeOK(t *testing.T, kernel *fakeKernel) net.Conn {
 // startPlugin 以 KORE_PLUGIN_SOCK 指向假主壳启动插件，stderr 收集到缓冲区。
 func startPlugin(t *testing.T, socket string) (*exec.Cmd, *safeBuffer) {
 	t.Helper()
+	return startPluginIn(t, socket)
+}
+
+// startPluginIn 是 startPlugin 的扩展版：追加 extraEnv（如 TMPDIR=...），
+// 供「放弃后无临时文件残留」的用例把插件 TMPDIR 指到可观测的临时目录。
+func startPluginIn(t *testing.T, socket string, extraEnv ...string) (*exec.Cmd, *safeBuffer) {
+	t.Helper()
 	cmd := exec.Command(binaryPath)
-	cmd.Env = append(os.Environ(), "GOWORK=off", "KORE_PLUGIN_SOCK="+socket, "KORE_PLUGIN_ID=echo", "KORE_LOG_LEVEL=debug")
+	cmd.Env = append(append(os.Environ(), "GOWORK=off", "KORE_PLUGIN_SOCK="+socket, "KORE_PLUGIN_ID=echo", "KORE_LOG_LEVEL=debug"), extraEnv...)
 	stderr := &safeBuffer{}
 	cmd.Stderr = stderr
 	if err := cmd.Start(); err != nil {
