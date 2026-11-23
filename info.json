@@ -1,17 +1,27 @@
 {
   "id": "echo",
   "name": "Echo 验证插件",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "protocol": "kore.plugin.v1",
   "lifecycle": "lazy",
-  "depth_level": "basic",
+  "depth_level": "production",
   "entry": "bin/echo",
-  "capabilities": ["system:read"],
-  "triggers": ["invoke:ping"],
+  "capabilities": [
+    "system:read"
+  ],
+  "triggers": [
+    "invoke:ping"
+  ],
   "requires_kore": ">=0.1.0 <0.2.0",
-  "resources": {"memory_mb": 6, "cpu_quota": "20%", "pids_max": 32},
+  "resources": {
+    "memory_mb": 6,
+    "cpu_quota": "20%",
+    "pids_max": 32
+  },
   "depends_on": [],
   "conflicts": [],
-  "scenario_tags": ["ops"],
-  "size_bytes": 1250462
+  "scenario_tags": [
+    "ops"
+  ],
+  "size_bytes": 1353310
 }

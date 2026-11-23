@@ -2,6 +2,17 @@
 
 本仓库遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) 与语义化版本。
 
+## [0.1.4] - 2026-11-23
+
+### 新增
+
+- 补 `tests/fault/`：对 echo 做**进程级故障注入**——用假主壳（UDS + 真帧协议）起真二进制，覆盖握手超时 / 主壳拒握手 / 对端断开 / 非法参数 / 未知方法 / `crash` 约定退出码 / `kore.shutdown` 优雅退出等 10 个用例。保护"主壳侧异常时插件不能 hang、不能谎报成功"。
+- `depth_level`：`basic` → `production`（G-20：production 插件必须有 `tests/fault/`，本仓此前缺该目录）。
+
+### 说明
+
+- 无方法 / 协议 / 能力变更：`capabilities` / `triggers` / `requires_kore` / `lifecycle` 均不变；`id@version` 换 sha 故 patch bump。
+
 ## [0.1.3] - 2026-11-23
 
 ### 修复
