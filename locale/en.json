@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Echo Verification Plugin",
+    "description": "An M1 verification tool for the kore host's install → hello → invoke → crash-restart chain; no operations capability, not a production plugin.",
+    "detail": "docs/DETAIL.en.md"
+  }
+}

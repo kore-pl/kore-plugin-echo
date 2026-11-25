@@ -1,5 +1,7 @@
 # kore-plugin-echo
 
+语言：[简体中文](docs/DETAIL.md) · [English](docs/DETAIL.en.md) · [Español](docs/DETAIL.es.md) · [Français](docs/DETAIL.fr.md) · [Deutsch](docs/DETAIL.de.md) · [Русский](docs/DETAIL.ru.md) · [Português](docs/DETAIL.pt.md)
+
 kore 的 **M1 验证插件**：用于验证主壳的 `install → hello → invoke → 崩溃重启` 全链路，
 不提供任何运维业务能力，**不是生产级插件**（`info.json.depth_level = "basic"`）。
 
@@ -73,3 +75,7 @@ make check   # gofmt → go vet → go test -timeout 200s
 - **相关仓库**：[索引 kore-plugins](https://github.com/kore-pl/kore-plugins) · [协议文档](https://github.com/kore-pl/kore/blob/main/docs/PLUGIN-PROTOCOL.md) · [SDK 指南](https://github.com/kore-pl/kore/blob/main/docs/PLUGIN-SDK.md)
 
 <!-- oss:end -->
+
+## 支持本项目
+
+如果这个插件帮你验证了主壳链路、少踩一个坑，欢迎去 [GitHub 仓库](https://github.com/kore-pl/kore-plugin-echo) 点个 star ⭐——你的支持就是我继续更新的动力。

@@ -2,6 +2,17 @@
 
 本仓库遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) 与语义化版本。
 
+## 0.1.6 — 2026-11-25
+
+### 新增
+
+- 补齐七语言使用说明（`docs/DETAIL*.md`）与插件元数据（`locale/*.json`），README 顶部新增语言切换行；新增 SECURITY 英文译文。
+- 补齐 dependabot、CODEOWNERS 与本地化分支模型、SSH 签名约定说明。
+
+### 变更
+
+- 发起带 SSH 签名的 `v0.1.6` 版本 tag；仅文档与工程标准化，不改协议、能力与方法契约，历史 tag 不动、不推送。
+
 ## [0.1.5] - 2026-11-24
 
 ### 变更

@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Echo 验证插件",
+    "description": "kore 主壳 install → hello → invoke → 崩溃重启全链路的 M1 验证工具，不提供运维业务能力，不是生产级插件。",
+    "detail": "docs/DETAIL.md"
+  }
+}

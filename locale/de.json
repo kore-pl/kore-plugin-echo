@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Echo-Verifikationsplugin",
+    "description": "Ein M1-Verifikationswerkzeug für die Kette install → hello → invoke → Absturz-Neustart des kore-Hosts; keine Betriebsfunktion, kein Produktions-Plugin.",
+    "detail": "docs/DETAIL.de.md"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Plugin de verificação Echo",
+    "description": "Ferramenta de verificação M1 da cadeia install → hello → invoke → reinício após falha do host kore; sem capacidade de operações, não é um plugin de produção.",
+    "detail": "docs/DETAIL.pt.md"
+  }
+}

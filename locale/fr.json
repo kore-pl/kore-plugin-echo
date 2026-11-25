@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Plugin de vérification Echo",
+    "description": "Outil de vérification M1 de la chaîne install → hello → invoke → redémarrage après plantage de l'hôte kore ; aucune fonction d'exploitation, plugin non production.",
+    "detail": "docs/DETAIL.fr.md"
+  }
+}
