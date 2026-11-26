@@ -28,7 +28,9 @@ func serve(conn net.Conn, cfg config, logger *slog.Logger) error {
 			logger.Debug("忽略非 request 帧")
 			continue
 		}
-		response, shutdown := dispatch(request, cfg, logger)
+		// 方法级 panic 不得带走进程：隔离为 E_INTERNAL 响应，会话循环继续服务。
+		// crash 约定的 os.Exit(7) 不经 recover，仍按约定退出。
+		response, shutdown := dispatchSafely(request, cfg, logger)
 		if err := pluginapi.WriteJSON(conn, response); err != nil {
 			if shutdown {
 				return nil // 内核已关闭连接，退出码仍按优雅退出
@@ -52,4 +54,27 @@ func decodeRequest(payload []byte) (*pluginapi.Request, error) {
 		return nil, nil
 	}
 	return request, nil
+}
+
+// panicValue 把 recover 值安全转成字符串，避免任意值实现 Stringer 时二次 panic。
+type panicValue struct{ value any }
+
+func (p panicValue) String() string { return fmt.Sprint(p.value) }
+
+// dispatchSafely 把方法级 panic 转成 E_INTERNAL 响应帧，保住进程与会话循环。
+// 日志只记方法与请求 id，不写 token（凭据不得进日志）。
+func dispatchSafely(request *pluginapi.Request, cfg config, logger *slog.Logger) (response *pluginapi.Response, shutdown bool) {
+	defer func() {
+		if recovered := recover(); recovered != nil {
+			logger.Error("方法 panic 已隔离", "method", request.Method, "id", request.ID, "panic", panicValue{value: recovered})
+			response = &pluginapi.Response{
+				Type:  pluginapi.TypeResponse,
+				ID:    request.ID,
+				ReqID: request.ReqID,
+				Error: &pluginapi.Error{Code: pluginapi.E_INTERNAL, Message: "方法执行异常，已隔离"},
+			}
+			shutdown = false
+		}
+	}()
+	return dispatch(request, cfg, logger)
 }

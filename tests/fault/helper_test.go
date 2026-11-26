@@ -21,6 +21,9 @@ import (
 // binaryPath 是 TestMain 预构建的 echo 二进制（一次构建，所有用例复用）。
 var binaryPath string
 
+// probeBinaryPath 是带 -tags faultinject 构建的二进制，仅用于方法 panic 故障注入。
+var probeBinaryPath string
+
 // TestMain 在仓库根构建插件二进制，避免每个用例 go run 的秒级开销。
 func TestMain(m *testing.M) {
 	dir, err := os.MkdirTemp("", "echo-fault-")
@@ -30,11 +33,19 @@ func TestMain(m *testing.M) {
 	}
 	defer os.RemoveAll(dir)
 	binaryPath = filepath.Join(dir, "echo")
+	probeBinaryPath = filepath.Join(dir, "echo-probe")
 	build := exec.Command("go", "build", "-o", binaryPath, ".")
 	build.Dir = filepath.Join("..", "..")
 	build.Env = append(os.Environ(), "GOWORK=off")
 	if out, err := build.CombinedOutput(); err != nil {
 		fmt.Fprintf(os.Stderr, "构建 echo 失败: %v\n%s", err, out)
+		os.Exit(1)
+	}
+	build = exec.Command("go", "build", "-tags", "faultinject", "-o", probeBinaryPath, ".")
+	build.Dir = filepath.Join("..", "..")
+	build.Env = append(os.Environ(), "GOWORK=off")
+	if out, err := build.CombinedOutput(); err != nil {
+		fmt.Fprintf(os.Stderr, "构建 faultinject 探针失败: %v\n%s", err, out)
 		os.Exit(1)
 	}
 	os.Exit(m.Run())
