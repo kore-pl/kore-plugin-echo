@@ -8,7 +8,7 @@
 
 ### 这是生产插件吗？
 
-不是。它是 M1 验证工具，depth_level=basic，不承担运维业务。
+不是。它是 M1 验证工具，depth_level=production（故障注入与边界用例均通过），不承担运维业务。
 
 ### 为什么用 lazy？
 

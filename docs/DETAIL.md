@@ -1,6 +1,6 @@
 # kore-plugin-echo 使用说明
 
-kore 的 M1 验证插件（id `echo`）：验证主壳 `install → hello → invoke → 崩溃重启` 全链路。不提供任何运维业务能力，**不是生产级插件**（`depth_level=basic`）。
+kore 的 M1 验证插件（id `echo`）：验证主壳 `install → hello → invoke → 崩溃重启` 全链路。不提供任何运维业务能力，已补齐故障注入与边界用例，`depth_level=production`（质量门禁达标，不代表提供业务能力）。
 
 ## 安装与兼容性
 

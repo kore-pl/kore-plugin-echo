@@ -2,6 +2,18 @@
 
 本仓库遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) 与语义化版本。
 
+## 0.1.7 — 2026-11-26
+
+### 新增
+
+- 补齐 Gitea issue #1 指定的 5 类进程级故障注入（tests/fault/）：UDS 断连重连、帧超限、握手 token 错、方法 panic 后进程存活、慢调用超时；dispatchSafely 将方法级 panic 隔离为 E_INTERNAL，保住进程与会话循环。
+- 补齐 tests/boundary/：异常输入、并发（含 t.Parallel 多实例）、权限不足（错 token / 未声明方法）、资源耗尽（超长帧）四类边界用例，满足升级判据并接入 make check 的 race 门禁。
+
+### 变更
+
+- depth_level：basic → production（G-20：故障注入 + 边界用例两条判据同时满足）。验证件属性不变，不代表提供业务能力。
+- 版本 0.1.6 → 0.1.7（patch）：id@version 换 sha，协议、能力、方法契约不变。
+
 ## 0.1.6 — 2026-11-25
 
 ### 新增

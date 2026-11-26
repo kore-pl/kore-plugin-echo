@@ -3,7 +3,7 @@
 语言：[简体中文](docs/DETAIL.md) · [English](docs/DETAIL.en.md) · [Español](docs/DETAIL.es.md) · [Français](docs/DETAIL.fr.md) · [Deutsch](docs/DETAIL.de.md) · [Русский](docs/DETAIL.ru.md) · [Português](docs/DETAIL.pt.md)
 
 kore 的 **M1 验证插件**：用于验证主壳的 `install → hello → invoke → 崩溃重启` 全链路，
-不提供任何运维业务能力，**不是生产级插件**（`info.json.depth_level = "basic"`）。
+不提供任何运维业务能力，但已按 G-20 补齐故障注入 `tests/fault/` 与边界用例 `tests/boundary/`，`info.json.depth_level = "production"`（质量门禁达标，不代表提供业务能力）。
 
 ## 定位与边界
 
@@ -40,7 +40,7 @@ kore 的 **M1 验证插件**：用于验证主壳的 `install → hello → invo
 
 ```bash
 make build   # CGO_ENABLED=0 GOAMD64=v1 go build -trimpath -buildvcs=false -ldflags="-s -w" -o bin/echo .
-make dist    # 产出 dist/echo-0.1.5.tar.gz（info.json + bin/echo + web/ + SHA256SUMS）与同名 .sha256
+make dist    # 产出 dist/echo-0.1.7.tar.gz（info.json + bin/echo + web/ + SHA256SUMS）与同名 .sha256
 make check   # gofmt → go vet → go test -timeout 200s
 ```
 
@@ -69,9 +69,9 @@ make check   # gofmt → go vet → go test -timeout 200s
 - **贡献**：[CONTRIBUTING.md](CONTRIBUTING.md)（构建、门禁、发版、边界）。
 - **安全**：[SECURITY.md](SECURITY.md)——漏洞不要开公开 issue。
 - **行为准则**：[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)。
-- **兼容性**：`protocol: kore.plugin.v1` · `requires_kore: >=0.1.0 <0.2.0` · `lifecycle: lazy` · 深度等级 `basic`。
+- **兼容性**：`protocol: kore.plugin.v1` · `requires_kore: >=0.1.0 <0.2.0` · `lifecycle: lazy` · 深度等级 `production`。
 - **验证方式**：本地 `make check` 优先（GitHub CI 只手动触发，Gitea CI 按版本 tag 触发；发布前 `make dist` 连跑两次核对 sha 一致）。
-- **发布产物**：`make dist` → `dist/echo-0.1.5.tar.gz` + `.sha256`（位级可复现，连跑两次 sha 相同）。
+- **发布产物**：`make dist` → `dist/echo-0.1.7.tar.gz` + `.sha256`（位级可复现，连跑两次 sha 相同）。
 - **相关仓库**：[索引 kore-plugins](https://github.com/kore-pl/kore-plugins) · [协议文档](https://github.com/kore-pl/kore/blob/main/docs/PLUGIN-PROTOCOL.md) · [SDK 指南](https://github.com/kore-pl/kore/blob/main/docs/PLUGIN-SDK.md)
 
 <!-- oss:end -->

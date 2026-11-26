@@ -43,6 +43,7 @@ func dispatch(request *pluginapi.Request, cfg config, logger *slog.Logger) (*plu
 		response.Result = json.RawMessage(`{"ok":true,"config_digest":""}`)
 		return response, false
 	}
+	maybeInjectPanic(request.Method)
 	verb, ok := businessVerb(request.Method, cfg.id)
 	if !ok {
 		response.Error = notFound(request.Method)
